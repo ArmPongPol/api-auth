@@ -31,5 +31,5 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: |
-          railway link ${{ secrets.RAILWAY_SERVICE_ID }}
+          railway link ${{ secrets.RAILWAY_PROJECT_ID }}
           railway up --detach
