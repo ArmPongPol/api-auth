@@ -1,32 +1,25 @@
-name: CI/CD - Deploy to Railway
+name: Build and Deploy to Railway
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
+          distribution: 'corretto'
 
-      - name: Build with Gradle
+      - name: Build JAR
         run: ./gradlew clean build -x test
-
-      - name: Check Railway Token
-        run: |
-          echo "RAILWAY_TOKEN length: ${#RAILWAY_TOKEN}"
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
       - name: Install Railway CLI
         run: npm install -g @railway/cli
@@ -37,4 +30,5 @@ jobs:
           SERVICE_NAME: api-auth
           PROJECT_ID: 28895591-1733-45d2-9ea1-3a19bf7e3c2d
         run: |
-          railway up --service $SERVICE_NAME --detach
+          echo "Using Railway Project: $PROJECT_ID"
+          railway up --project $PROJECT_ID --service $SERVICE_NAME --detach
