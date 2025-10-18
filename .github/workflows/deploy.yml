@@ -28,6 +28,7 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_PROJECT_ID: 28895591-1733-45d2-9ea1-3a19bf7e3c2d
+          RAILWAY_AUTOLINK_PROJECT: true
           SERVICE_NAME: api-auth
         run: |
           echo "Deploying to Railway Project: $RAILWAY_PROJECT_ID"
