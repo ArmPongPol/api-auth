@@ -1,35 +1,20 @@
-name: Build and Deploy to Railway
+# .github/workflows/deploy.yml
+name: Deploy to Railway
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'corretto'
-
-      - name: Build JAR
-        run: ./gradlew clean build -x test
-
-      - name: Install Railway CLI
-        run: npm install -g @railway/cli
+      - name: Install Railway
+        run: npm i -g @railway/cli
 
       - name: Deploy to Railway
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          RAILWAY_PROJECT_ID: 28895591-1733-45d2-9ea1-3a19bf7e3c2d
-          RAILWAY_AUTOLINK_PROJECT: true
-          SERVICE_NAME: api-auth
-        run: |
-          echo "Deploying to Railway Project: $RAILWAY_PROJECT_ID"
-          railway up --service $SERVICE_NAME --detach
