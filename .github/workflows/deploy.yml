@@ -3,43 +3,31 @@ name: CI/CD - Deploy to Railway
 on:
   push:
     branches:
-      - main  # หรือ branch ที่ต้องการ deploy อัตโนมัติ
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout source code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Java environment (ใช้ JDK 21 ตามโปรเจกต์)
-      - name: Set up JDK 21
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17'
 
-      # Step 3: Cache Gradle packages เพื่อ build เร็วขึ้น
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      # Step 4: Build JAR file
       - name: Build with Gradle
         run: ./gradlew clean build -x test
 
-      # Step 5: Deploy to Railway
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
       - name: Deploy to Railway
-        uses: railwayapp/railway-action@v3
-        with:
-          railwayToken: ${{ secrets.RAILWAY_TOKEN }}
-          serviceName: api-auth           # ชื่อ service ที่อยู่ใน Railway ของคุณ
-          environment: production         # หรือ staging ถ้ามีหลาย environment
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          SERVICE_NAME: api-auth
+        run: |
+          railway up --service $SERVICE_NAME --detach
