@@ -2,7 +2,8 @@ name: Deploy Spring Boot to Railway
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
