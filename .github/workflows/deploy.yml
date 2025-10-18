@@ -27,8 +27,8 @@ jobs:
       - name: Deploy to Railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_PROJECT_ID: 28895591-1733-45d2-9ea1-3a19bf7e3c2d
           SERVICE_NAME: api-auth
-          PROJECT_ID: 28895591-1733-45d2-9ea1-3a19bf7e3c2d
         run: |
-          echo "Using Railway Project: $PROJECT_ID"
-          railway up --project $PROJECT_ID --service $SERVICE_NAME --detach
+          echo "Deploying to Railway Project: $RAILWAY_PROJECT_ID"
+          railway up --service $SERVICE_NAME --detach
