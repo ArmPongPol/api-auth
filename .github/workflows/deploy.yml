@@ -34,6 +34,4 @@ jobs:
           railway --help
 
       - name: 🚀 Deploy to Railway
-        run: |
-          echo "Deploying service: $SERVICE_NAME"
-          railway up --service $SERVICE_NAME --detach
+        run: railway up --service $SERVICE_NAME --detach
