@@ -35,5 +35,6 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           SERVICE_NAME: api-auth
+          PROJECT_ID: 28895591-1733-45d2-9ea1-3a19bf7e3c2d
         run: |
           railway up --service $SERVICE_NAME --detach
