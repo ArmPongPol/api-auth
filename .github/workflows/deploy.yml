@@ -22,6 +22,12 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build -x test
 
+      - name: Check Railway Token
+        run: |
+          echo "RAILWAY_TOKEN length: ${#RAILWAY_TOKEN}"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
