@@ -34,7 +34,7 @@ jobs:
 
       - name: Deploy to Railway
         run: |
-          railway link -p 28895591-1733-45d2-9ea1-3a19bf7e3c2d
-          railway up
+          railway init
+          railway whoami
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
