@@ -25,10 +25,11 @@ jobs:
         run: ./gradlew build -x test
 
       - name: Install Railway CLI
-        run: npm i -g @railway/cli
+        run: | 
+          npm i -g @railway/cli
+          railway --help
 
       - name: Deploy to Railway
         run: |
-          railway --help
           railway login --token ${{ secrets.RAILWAY_TOKEN }}
           railway up
