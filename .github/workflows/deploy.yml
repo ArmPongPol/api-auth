@@ -28,7 +28,7 @@ jobs:
         run: npm i -g @railway/cli
 
       - name: Deploy to Railway
-        run:
+        run: |
           railway link -p 28895591-1733-45d2-9ea1-3a19bf7e3c2d
           railway up
         env:
