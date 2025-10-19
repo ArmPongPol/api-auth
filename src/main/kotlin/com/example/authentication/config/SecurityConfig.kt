@@ -47,7 +47,7 @@ class SecurityConfig @Autowired constructor(
   @Bean
   fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
     http
-      .cors { corsConfigurationSource() }
+      .cors { it.configurationSource(corsConfigurationSource()) }
       .csrf { it.disable() }
       .authorizeHttpRequests { auth ->
         auth
