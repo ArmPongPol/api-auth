@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
@@ -65,25 +66,18 @@ class SecurityConfig @Autowired constructor(
   }
 
   @Bean
-  fun corsConfigurationSource(): UrlBasedCorsConfigurationSource {
-    val configuration = CorsConfiguration()
+  fun corsConfigurationSource(): CorsConfigurationSource {
+    val config = CorsConfiguration()
+    config.allowedOrigins = listOf(
+      "https://web-lf3irba8a-armpongpols-projects.vercel.app",
+      "http://localhost:3000"
+    )
+    config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+    config.allowedHeaders = listOf("*")
+    config.allowCredentials = true
 
-    // Allow requests from specific origins
-    configuration.allowedOrigins = listOf("https://web-lf3irba8a-armpongpols-projects.vercel.app")
-
-    // Allow credentials (cookies, authorization headers, etc.)
-//    configuration.allowCredentials = true
-
-    // Allow specific HTTP methods
-    configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE")
-
-    // Allow specific headers
-    configuration.allowedHeaders = listOf("*")
-
-    // Apply CORS settings to all paths
     val source = UrlBasedCorsConfigurationSource()
-    source.registerCorsConfiguration("/**", configuration)
-
+    source.registerCorsConfiguration("/**", config)
     return source
   }
 }
