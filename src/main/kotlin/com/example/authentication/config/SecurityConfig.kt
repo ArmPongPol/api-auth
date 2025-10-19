@@ -68,22 +68,20 @@ class SecurityConfig @Autowired constructor(
   @Bean
   fun corsConfigurationSource(): CorsConfigurationSource {
     val config = CorsConfiguration()
-    config.allowedOrigins = listOf(
+    config.allowedOriginPatterns = listOf(
       "http://localhost:3000",
-      "https://web-lf3irba8a-armpongpols-projects.vercel.app",
-      "https://web-git-main-armpongpols-projects.vercel.app/",
-      "https://web-nu-ecru-20.vercel.app/"
+      "http://localhost:*",
+      "https://*.vercel.app"  // อนุญาตทุก Vercel subdomain
     )
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
     config.exposedHeaders = listOf("Authorization", "Content-Type")
     config.allowCredentials = true
 
-    println("✅ CORS Config Loaded with origins: ${config.allowedOrigins}")
+    println("✅ CORS Config Loaded with origin patterns: ${config.allowedOriginPatterns}")
 
     val source = UrlBasedCorsConfigurationSource()
     source.registerCorsConfiguration("/**", config)
     return source
   }
-
 }
