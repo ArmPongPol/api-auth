@@ -69,7 +69,7 @@ class SecurityConfig @Autowired constructor(
     val configuration = CorsConfiguration()
 
     // Allow requests from specific origins
-    configuration.allowedOrigins = listOf("*")
+    configuration.allowedOrigins = listOf("http://localhost:3000")
 
     // Allow credentials (cookies, authorization headers, etc.)
 //    configuration.allowCredentials = true
