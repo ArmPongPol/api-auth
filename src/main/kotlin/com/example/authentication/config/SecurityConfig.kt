@@ -70,7 +70,9 @@ class SecurityConfig @Autowired constructor(
     val config = CorsConfiguration()
     config.allowedOrigins = listOf(
       "http://localhost:3000",
-      "https://web-lf3irba8a-armpongpols-projects.vercel.app"
+      "https://web-lf3irba8a-armpongpols-projects.vercel.app",
+      "https://web-git-main-armpongpols-projects.vercel.app/",
+      "https://web-nu-ecru-20.vercel.app/"
     )
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
