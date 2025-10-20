@@ -51,14 +51,12 @@ class SecurityConfig @Autowired constructor(
       .csrf { it.disable() }
       .authorizeHttpRequests { auth ->
         auth
-          .requestMatchers("/api/auth/**").permitAll()
-          .requestMatchers("/api/public/**").permitAll()
+          .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
           .anyRequest().authenticated()
       }
       .sessionManagement {
         it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       }
-
       .authenticationProvider(authenticationProvider())
       .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
 
@@ -68,9 +66,10 @@ class SecurityConfig @Autowired constructor(
   @Bean
   fun corsConfigurationSource(): CorsConfigurationSource {
     val config = CorsConfiguration()
-    config.allowedOriginPatterns = listOf(
-      "*"
-    )
+    config.allowedOriginPatterns = listOf("*")
+    config.allowCredentials = false
+
+//    config.allowedOriginPatterns = listOf("*")
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
     config.exposedHeaders = listOf("Authorization", "Content-Type")
