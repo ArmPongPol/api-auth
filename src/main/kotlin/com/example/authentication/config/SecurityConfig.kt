@@ -66,17 +66,18 @@ class SecurityConfig @Autowired constructor(
   @Bean
   fun corsConfigurationSource(): CorsConfigurationSource {
     val config = CorsConfiguration()
-    config.allowedOriginPatterns = listOf("*")
-    config.allowCredentials = false
-
-//    config.allowedOriginPatterns = listOf("*")
+    config.allowedOriginPatterns = listOf(
+      "http://localhost:3000",       // สำหรับ dev local
+      "https://*.vercel.app"         // สำหรับทุก subdomain ของ vercel.app
+    )
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
     config.exposedHeaders = listOf("Authorization", "Content-Type")
-//    config.allowCredentials = true
+    config.allowCredentials = true    // ✅ อนุญาต cookie / header token
 
     val source = UrlBasedCorsConfigurationSource()
     source.registerCorsConfiguration("/**", config)
     return source
   }
+
 }
