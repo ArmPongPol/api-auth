@@ -67,8 +67,9 @@ class SecurityConfig @Autowired constructor(
   fun corsConfigurationSource(): CorsConfigurationSource {
     val config = CorsConfiguration()
     config.allowedOriginPatterns = listOf(
-      "http://localhost:3000",       // สำหรับ dev local
-      "https://*.vercel.app/"         // สำหรับทุก subdomain ของ vercel.app
+      "http://localhost:3000",
+      "https://*.vercel.app/",
+      "https://web-virid-five.vercel.app"
     )
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
