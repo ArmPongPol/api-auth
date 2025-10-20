@@ -35,4 +35,4 @@ jobs:
           railway --help
 
       - name: Deploy to Railway
-        run: railway up --service $SERVICE_NAME
+        run: railway up --service $SERVICE_NAME --detach
