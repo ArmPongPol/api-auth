@@ -52,8 +52,8 @@ class SecurityConfig @Autowired constructor(
       .csrf { it.disable() }
       .authorizeHttpRequests { auth ->
         auth
-          .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
           .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+          .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
           .anyRequest().authenticated()
       }
       .sessionManagement {
@@ -72,6 +72,7 @@ class SecurityConfig @Autowired constructor(
     configuration.allowedMethods = listOf("*")
     configuration.allowedHeaders = listOf("*")
     configuration.exposedHeaders = listOf("*")
+//    configuration.allowCredentials = true
 
     val source = UrlBasedCorsConfigurationSource()
     source.registerCorsConfiguration("/**", configuration)
