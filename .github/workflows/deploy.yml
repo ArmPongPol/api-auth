@@ -34,5 +34,5 @@ jobs:
           npm i -g @railway/cli
           railway --help
 
-      - name: Deploy to Railway
+      - name: Deploy to Railway test
         run: railway up --service $SERVICE_NAME
