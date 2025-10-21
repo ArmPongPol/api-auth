@@ -48,12 +48,12 @@ class SecurityConfig @Autowired constructor(
   @Bean
   fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
     http
-      .csrf { it.disable() }
       .cors { it.configurationSource(corsConfigurationSource()) }
+      .csrf { it.disable() }
       .authorizeHttpRequests { auth ->
         auth
           .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
-          .requestMatchers(HttpMethod.OPTIONS).permitAll()
+          .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
           .anyRequest().authenticated()
       }
       .sessionManagement {
