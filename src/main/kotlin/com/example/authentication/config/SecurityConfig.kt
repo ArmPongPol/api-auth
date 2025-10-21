@@ -5,6 +5,7 @@ import com.example.authentication.utils.JwtAuthFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
@@ -52,6 +53,7 @@ class SecurityConfig @Autowired constructor(
       .authorizeHttpRequests { auth ->
         auth
           .requestMatchers("/api/auth/**", "/api/public/**").permitAll()
+          .requestMatchers(HttpMethod.OPTIONS).permitAll()
           .anyRequest().authenticated()
       }
       .sessionManagement {
