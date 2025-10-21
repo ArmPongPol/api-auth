@@ -69,14 +69,12 @@ class SecurityConfig @Autowired constructor(
   fun corsConfigurationSource(): CorsConfigurationSource {
     val config = CorsConfiguration()
     config.allowedOriginPatterns = listOf(
-      "http://localhost:3000",
-      "https://*.up.railway.app",
-      "https://web-production-f1bf3.up.railway.app"
+      "*"
     )
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
     config.exposedHeaders = listOf("Authorization", "Content-Type")
-    config.allowCredentials = true    // ✅ อนุญาต cookie / header token
+//    config.allowCredentials = true
 
     val source = UrlBasedCorsConfigurationSource()
     source.registerCorsConfiguration("/**", config)
