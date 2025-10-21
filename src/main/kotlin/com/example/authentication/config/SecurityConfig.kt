@@ -72,7 +72,7 @@ class SecurityConfig @Autowired constructor(
     configuration.allowedMethods = listOf("*")
     configuration.allowedHeaders = listOf("*")
     configuration.exposedHeaders = listOf("*")
-//    configuration.allowCredentials = true
+//    configuration.allowCredentials = true //
 
     val source = UrlBasedCorsConfigurationSource()
     source.registerCorsConfiguration("/**", configuration)
