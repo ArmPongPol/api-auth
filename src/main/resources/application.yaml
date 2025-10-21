@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://shuttle.proxy.rlwy.net:31203/railway
     username: postgres
-    password: tnQOSsjWjimgDaClKufqWQGXGfEpplYf
+    password: PrpHXjJMViKHqpCmecqZTRQAmkPCpVsE
     driver-class-name: org.postgresql.Driver
 
   jpa:
