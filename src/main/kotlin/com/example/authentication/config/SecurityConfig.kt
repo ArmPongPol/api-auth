@@ -68,8 +68,8 @@ class SecurityConfig @Autowired constructor(
     val config = CorsConfiguration()
     config.allowedOriginPatterns = listOf(
       "http://localhost:3000",
-      "https://*.vercel.app/",
-      "https://web-virid-five.vercel.app"
+      "https://*.up.railway.app",
+      "https://web-production-f1bf3.up.railway.app"
     )
     config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
     config.allowedHeaders = listOf("*")
