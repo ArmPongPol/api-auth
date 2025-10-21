@@ -67,17 +67,14 @@ class SecurityConfig @Autowired constructor(
 
   @Bean
   fun corsConfigurationSource(): CorsConfigurationSource {
-    val config = CorsConfiguration()
-    config.allowedOriginPatterns = listOf(
-      "*"
-    )
-    config.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
-    config.allowedHeaders = listOf("*")
-    config.exposedHeaders = listOf("Authorization", "Content-Type")
-//    config.allowCredentials = true
+    val configuration = CorsConfiguration()
+    configuration.allowedOrigins = listOf("*")
+    configuration.allowedMethods = listOf("*")
+    configuration.allowedHeaders = listOf("*")
+    configuration.exposedHeaders = listOf("*")
 
     val source = UrlBasedCorsConfigurationSource()
-    source.registerCorsConfiguration("/**", config)
+    source.registerCorsConfiguration("/**", configuration)
     return source
   }
 
