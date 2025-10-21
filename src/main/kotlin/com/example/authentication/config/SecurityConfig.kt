@@ -69,6 +69,7 @@ class SecurityConfig @Autowired constructor(
   fun corsConfigurationSource(): CorsConfigurationSource {
     val configuration = CorsConfiguration()
     configuration.allowedOrigins = listOf(
+      "http://localhost:3000",
       "http://localhost:3000/**"
     )
     configuration.allowedMethods = listOf("*")
